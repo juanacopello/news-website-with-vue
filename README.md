@@ -1,4 +1,4 @@
-# news_app
+# News Website
 
 ## Project setup
 ```
