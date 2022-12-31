@@ -4,10 +4,15 @@
       <article v-for="(a, index) in articles" :key="index" class="cardArticulo">
         <img :src="articles[index].urlToImage" alt="imagen_noticia" />
         <div class="texto_articulo">
-           <h4>{{ articles[index].title }}</h4>
-        <p><span v-if="articles[index].author !== null">{{ articles[index].author }} 
-          for </span>
-          <a :href="articles[index].url" target="_blank">{{ articles[index].source.name }}</a></p>
+          <h4>{{ articles[index].title.split("-")[0] }}</h4>
+          <p>
+            <span v-if="articles[index].author !== null"
+              >{{ articles[index].author }} for
+            </span>
+            <a :href="articles[index].url" target="_blank">{{
+              articles[index].source.name
+            }}</a>
+          </p>
         </div>
       </article>
     </div>
@@ -37,11 +42,17 @@ export default {
       .then((response) => {
         console.log(response.data.articles);
         this.articles = response.data.articles;
+
+        
+
+
       })
+    
       .catch((error) => {
         console.log(error);
       });
   },
+  computed(){},
   methods: {
     cambiarNombre(nombre, event) {
       this.name = nombre;
@@ -82,22 +93,33 @@ export default {
   border-bottom: 1px solid var(--first-color);
   display: flex;
   flex-direction: row;
+  text-align: left;
 }
 
 .cardArticulo a {
   color: var(--first-color);
   font-weight: 700;
-  
 }
 
-.cardArticulo img{
+.cardArticulo h4 {
+  font-size: 15px;
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+.cardArticulo p {
+  padding: 20px 0;
+  margin: 0;
+}
+
+.cardArticulo img {
   width: 250px;
   height: 180px;
 }
 
-.texto_articulo{
+.texto_articulo {
   display: flex;
   flex-direction: column;
-
+  margin:  0 10px;
 }
 </style>
