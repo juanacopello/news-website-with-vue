@@ -19,17 +19,21 @@
 
     <!-- <articleComponent :newsArticles="articles" /> -->
     <!-- || articles[index].author.includes('https') == false -->
+    <FooterComponent />
   </div>
 </template>
 
 <script>
 import Axios from "axios";
 // import articleComponent from "./components/articleComponent.vue";
+import FooterComponent from "./components/FooterComponent.vue";
+
 
 export default {
   name: "App",
   components: {
     // articleComponent,
+    FooterComponent
   },
   data() {
     return {
@@ -49,7 +53,11 @@ export default {
         console.log(error);
       });
   },
-  computed() {},
+  computed: {
+    // displayAuthor() {
+    //   return articles[index].author !== null
+    // }
+  },
   methods: {},
 };
 </script>
@@ -70,6 +78,7 @@ export default {
 .containerArticulos {
   display: flex;
   flex-direction: column;
+  margin: 0 5px;
 }
 
 .cardArticulo {
@@ -87,9 +96,10 @@ export default {
 }
 
 .cardArticulo h4 {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: normal;
   margin-bottom: 0;
+  line-height: 1;
 }
 
 .cardArticulo p {
