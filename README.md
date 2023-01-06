@@ -1,5 +1,8 @@
 # News Website
 
+Building a news website with Vue 3 and Axios using [News API](https://newsapi.org/)
+
+
 ## Project setup
 ```
 npm install
