@@ -27,6 +27,7 @@
 import Axios from "axios";
 // import articleComponent from "./components/articleComponent.vue";
 import FooterComponent from "./components/FooterComponent.vue";
+// import dayjs from 'dayjs'
 
 
 export default {
@@ -47,8 +48,11 @@ export default {
       .then((response) => {
         console.log(response.data.articles);
         this.articles = response.data.articles;
+        
+        
+       
       })
-
+      
       .catch((error) => {
         console.log(error);
       });
@@ -58,7 +62,9 @@ export default {
     //   return articles[index].author !== null
     // }
   },
-  methods: {},
+  methods: {
+
+  },
 };
 </script>
 
@@ -85,9 +91,14 @@ export default {
   display: flex;
   flex-direction: row;
   text-align: left;
-  margin: auto;
-  padding: 10px 0;
+  padding: 15px 0;
   border-bottom: 1px solid black;
+  height: 200px;
+}
+
+
+.cardArticulo:last-child{
+  border-bottom: none;
 }
 
 .cardArticulo a {
@@ -97,16 +108,19 @@ export default {
 
 .cardArticulo h4 {
   font-size: 14px;
-  font-weight: normal;
+  font-weight: 700;
   margin-bottom: 0;
   line-height: 1;
+  color: #161616;
+  margin-top: 10px;
 }
 
 .cardArticulo p {
   padding: 20px 0;
   margin: 0;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 10px;
+  color: #706d6d;
 }
 
 .cardArticulo img {
