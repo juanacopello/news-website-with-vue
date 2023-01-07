@@ -5,7 +5,7 @@
         <img :src="articles[index].urlToImage" alt="imagen_noticia" />
         <div class="texto_articulo">
           <h4>{{ articles[index].title.split("-")[0] }}</h4>
-          <p>
+          <p class="author">
             <span v-if="articles[index].author !== null"
               >{{ articles[index].author }} in
             </span>
@@ -13,6 +13,7 @@
               articles[index].source.name
             }}</a>
           </p>
+          <p class="time">{{ timeTranform(index)}}</p>
         </div>
       </article>
     </div>
@@ -27,7 +28,8 @@
 import Axios from "axios";
 // import articleComponent from "./components/articleComponent.vue";
 import FooterComponent from "./components/FooterComponent.vue";
-// import dayjs from 'dayjs'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 
 export default {
@@ -41,7 +43,7 @@ export default {
       articles: [],
     };
   },
-  created() {
+  mounted() {
     Axios.get(
       "https://newsapi.org/v2/top-headlines?country=us&apiKey=d07831122a564646934cbc8636213c50"
     )
@@ -49,7 +51,7 @@ export default {
         console.log(response.data.articles);
         this.articles = response.data.articles;
         
-        
+        //console.log(dayjs(this.articles[0].publishedAt))
        
       })
       
@@ -58,12 +60,15 @@ export default {
       });
   },
   computed: {
-    // displayAuthor() {
-    //   return articles[index].author !== null
-    // }
+ 
+    
   },
   methods: {
-
+    timeTranform(i){
+      dayjs.extend(relativeTime)
+      const relTime = dayjs(this.articles[i].publishedAt).fromNow()
+      return relTime
+    }
   },
 };
 </script>
@@ -93,7 +98,8 @@ export default {
   text-align: left;
   padding: 15px 0;
   border-bottom: 1px solid black;
-  height: 200px;
+  height: 160px;
+  position: relative;
 }
 
 
@@ -115,7 +121,7 @@ export default {
   margin-top: 10px;
 }
 
-.cardArticulo p {
+.author {
   padding: 20px 0;
   margin: 0;
   text-transform: uppercase;
@@ -133,4 +139,11 @@ export default {
   flex-direction: column;
   margin: 0 10px;
 }
+
+.time{
+  font-size: 12px;
+  position: absolute;
+  bottom: 10px;
+}
+
 </style>
