@@ -2,7 +2,8 @@
   <div>
     <div class="containerArticulos">
       <article v-for="(a, index) in articles" :key="index" class="cardArticulo">
-        <img :src="articles[index].urlToImage" alt="imagen_noticia" />
+        <img v-if="articles[index].urlToImage !== null"
+        :src="articles[index].urlToImage" alt="imagen_noticia" />
         <div class="texto_articulo">
           <h4>{{ articles[index].title.split("-")[0] }}</h4>
           <p class="author">
@@ -126,7 +127,7 @@ export default {
   margin: 0;
   text-transform: uppercase;
   font-size: 10px;
-  color: #706d6d;
+  color: #232323;
 }
 
 .cardArticulo img {
@@ -144,6 +145,7 @@ export default {
   font-size: 12px;
   position: absolute;
   bottom: 10px;
+  color: #706d6d;
 }
 
 </style>
