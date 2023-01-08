@@ -1,5 +1,7 @@
 <template>
   <div>
+    <input type="text" v-model="searchValue" placeholder="Search news..." />
+    <button @click="getSearchedNews">Buscar</button>
     <div class="container">
       <article v-for="(a, index) in articles" :key="index" class="newsArticle"
        :class="{
@@ -45,6 +47,7 @@ export default {
   data() {
     return {
       articles: [],
+      searchValue: ""
     };
   },
   mounted() {
@@ -72,6 +75,14 @@ export default {
     },
     splitName(i){
       return this.articles[i].title.split("-")[0]
+    },
+    getSearchedNews(){
+      let query = this.searchValue.replace(' ', '+')
+      Axios.get(`https://newsapi.org/v2/everything?q='${query}'&apiKey=d07831122a564646934cbc8636213c50&pageSize=20&searchIn=title`)
+      .then(response => {
+      console.log(response)
+      this.articles = response.data.articles
+      })
     }
   },
 };
@@ -91,9 +102,6 @@ export default {
 }
 
 @import './assets/styles/home_mobile.css';
+@import './assets/styles/home_desktop.css';
 
-@media (min-width: 1000px) {
-  @import './assets/styles/home_desktop.css';
-
-}
 </style>
