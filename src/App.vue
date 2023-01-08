@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="containerArticulos">
+    <div class="container">
       <article v-for="(a, index) in articles" :key="index" class="newsArticle"
        :class="{
         no_image: articles[index].urlToImage == null,
@@ -90,5 +90,10 @@ export default {
   margin-top: 60px;
 }
 
-@import './assets/styles/home_.css';
+@import './assets/styles/home_mobile.css';
+
+@media (min-width: 1000px) {
+  @import './assets/styles/home_desktop.css';
+
+}
 </style>
