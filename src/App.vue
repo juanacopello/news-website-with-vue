@@ -1,15 +1,18 @@
 <template>
   <div>
     <input type="text" v-model="searchValue" placeholder="Search news..." />
-    <button @click="getSearchedNews">Buscar</button>
+    <button @click="getSearchedNews">Search</button>
     <div class="container">
       <article v-for="(a, index) in articles" :key="index" class="newsArticle"
        :class="{
         no_image: articles[index].urlToImage == null,
         with_image: articles[index].urlToImage !== null
        }">
-        <img v-if="articles[index].urlToImage !== null"
+       <figure v-if="articles[index].urlToImage !== null" class="imageContainer">
+         <img 
         :src="articles[index].urlToImage" alt="imagen_noticia" />
+       </figure>
+       
         <div class="texto_articulo">
           <h4>{{ splitName(index) }}</h4>
           <p class="author">
@@ -82,6 +85,7 @@ export default {
       .then(response => {
       console.log(response)
       this.articles = response.data.articles
+      this.searchValue = ''
       })
     }
   },

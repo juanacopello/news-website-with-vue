@@ -74,3 +74,7 @@
   .with_image .time{
     bottom: 10px;
   }
+
+  .imageContainer{
+    margin: 0;
+  }
